@@ -7,7 +7,7 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -30,7 +30,8 @@ def Department_button_input(department):
     last_entered_number = last_entered_number / 100  # Divide by 100 to get the correct decimal place
     last_entered_number = "{:.2f}".format(last_entered_number)  # Format as a string with 2 decimal places
     Fourth_Entry.delete('1.0', 'end')  # Add the start and end indices
-    Fourth_Entry.insert('end', department + ' ' + last_entered_number)  # Append the last_entered_number after the department
+    Fourth_Entry.insert('end', department)  # Insert the department
+    Fourth_Entry.insert("end", last_entered_number)
     Fourth_Entry.config(state='disabled')
     print(last_entered_number)
 
