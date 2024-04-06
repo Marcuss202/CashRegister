@@ -736,7 +736,7 @@ button_38.place(
 
 #---------- ENTRY WIDGETS -------------------------------------------------------------#
 
-Third_Entry = Text(
+Top_Entry = Text(
     canvas,
     bd=0,
     bg="#D3EEFF",
@@ -744,9 +744,9 @@ Third_Entry = Text(
     highlightthickness=0,
     state='disabled'
 )
-Third_Entry.place(
+Top_Entry.place(
     x=1069.0,
-    y=327.0,
+    y=288.0,
     width=166.0,
     height=17.0
 )
@@ -766,7 +766,7 @@ Second_Entry.place(
     height=18.0
 )
 
-Top_Entry = Text(
+Third_Entry = Text(
     canvas,
     bd=0,
     bg="#D3EEFF",
@@ -774,11 +774,27 @@ Top_Entry = Text(
     highlightthickness=0,
     state='disabled'
 )
-Top_Entry.place(
+Third_Entry.place(
     x=1069.0,
-    y=288.0,
+    y=327.0,
     width=166.0,
     height=17.0
+)
+
+Fourth_Entry = Text(
+    canvas,
+    bd=0,
+    bg="#D3EEFF",
+    fg="#000716",
+    highlightthickness=0,
+    font=("TkDefaultFont", 7),
+    state='disabled'
+)
+Fourth_Entry.place(
+    x=1069.0,
+    y=346.0,
+    width=166.0,
+    height=12.0
 )
 
 Last_Entry = Text(
@@ -798,21 +814,7 @@ Last_Entry.place(
 )
 
 
-Fourth_Entry = Text(
-    canvas,
-    bd=0,
-    bg="#D3EEFF",
-    fg="#000716",
-    highlightthickness=0,
-    font=("TkDefaultFont", 7),
-    state='disabled'
-)
-Fourth_Entry.place(
-    x=1069.0,
-    y=346.0,
-    width=166.0,
-    height=12.0
-)
+
 
 #---------- END -------------------------------------------------------------#
 
