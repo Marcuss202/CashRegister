@@ -10,7 +10,6 @@ from pathlib import Path
 from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
 import pyglet
 
-# replace 'font.ttf' with your ttf file 
 pyglet.font.add_file('D:\\GitHub\\CashRegister\\merchant-copy-doublesize.ttf')
 
 
@@ -28,43 +27,59 @@ def Cash_Register_turn_on():
     Last_Entry.config(state='normal')
     Last_Entry.insert('end', 'REG')
     Last_Entry.config(state='disabled')
+    Reg_mode()
 
 def Fourth_Entry_input(number):
-    Fourth_Entry.config(state='normal')  # Editable mode
-    Fourth_Entry.insert('end', number)  # Insert number
-    Fourth_Entry.config(state='disabled')  # Read-only mode
+    Fourth_Entry.config(state='normal')
+    Fourth_Entry.insert('end', number)
+    Fourth_Entry.config(state='disabled')
 
 def Department_button_input(department):
     Fourth_Entry.config(state='normal')
-    last_entered_number = int(Fourth_Entry.get('1.0', 'end-1c'))  # Convert to int instead of float
-    last_entered_number = last_entered_number / 100  # Divide by 100 to get the correct decimal place
-    last_entered_number = "{:.2f}".format(last_entered_number)  # Format as a string with 2 decimal places
-    num_spaces = max(0, 27 - len(department) - len(str(last_entered_number))) # Calculate the number of spaces needed
-    Fourth_Entry.delete('1.0', 'end')  # Add the start and end indices
-    Fourth_Entry.insert('end', department)  # Insert the department
-    Fourth_Entry.insert('end', " " * num_spaces + last_entered_number)  
+    last_entered_number = int(Fourth_Entry.get('1.0', 'end-1c'))
+    last_entered_number = last_entered_number / 100 
+    last_entered_number = "{:.2f}".format(last_entered_number)
+    num_spaces_dep = max(0, 27 - len(department) - len(str(last_entered_number)))
+    Fourth_Entry.delete('1.0', 'end')
+    Fourth_Entry.insert('end', department)
+    Fourth_Entry.insert('end', " " * num_spaces_dep + last_entered_number)  
     Fourth_Entry.config(state='disabled')
     print(last_entered_number)
 
 def Change_mode():
-    global mode  # Declare mode as global so we can modify it
-    mode_index = All_Modes.index(mode)  # Get the current index of mode
-    mode_index = (mode_index + 1) % len(All_Modes)  # Increment the index and wrap around if necessary
-    mode = All_Modes[mode_index]  # Update mode
-    # Update Last_Entry
+    global mode
+    mode_index = All_Modes.index(mode)
+    mode_index = (mode_index + 1) % len(All_Modes)
+    mode = All_Modes[mode_index]
     Last_Entry.config(state='normal')
     Last_Entry.delete('1.0', 'end')
     Last_Entry.insert('end', mode)
     Last_Entry.config(state='disabled')
+    mode_operator()
 
 def Program_button_input():
     global mode, mode_index
     mode_index = 1
     mode = All_Modes[mode_index]
-    Last_Entry.config(state='normal')  # Uncomment this line
-    Last_Entry.delete('1.0', 'end')  # Delete existing content
-    Last_Entry.insert('end', mode)  # Insert new mode
+    Last_Entry.config(state='normal')
+    Last_Entry.delete('1.0', 'end')
+    Last_Entry.insert('end', mode)
     Last_Entry.config(state='disabled')
+
+def Reg_mode():
+    Third_Entry.config(state='normal')
+    Third_Entry.config(bg="#51458B", fg="#FFFFFF")
+    num_spaces_reg = max(0, 17 - len("***TOTAL") - len(str(0.00)))
+    Third_Entry.delete('1.0', 'end')
+    Third_Entry.insert('end', '***TOTAL')
+    Third_Entry.insert('end', " " * num_spaces_reg + "0.00")
+    Third_Entry.config(state='disabled')
+
+def mode_operator():
+    global mode
+    if mode == "REG":
+        Reg_mode()
+
 
     
 #---------- GLOBAL VARIABLES -------------------------------------------------------------#
@@ -807,6 +822,7 @@ Third_Entry = Text(
     bg="#D3EEFF",
     fg="#000716",
     highlightthickness=0,
+    font=("Merchant Copy DoubleSize", 8, "bold"),
     state='disabled'
 )
 Third_Entry.place(
