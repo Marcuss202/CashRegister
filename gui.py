@@ -8,6 +8,10 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage
+import pyglet
+
+# replace 'font.ttf' with your ttf file 
+pyglet.font.add_file('D:\\GitHub\\CashRegister\\merchant-copy-doublesize.ttf')
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -29,9 +33,10 @@ def Department_button_input(department):
     last_entered_number = int(Fourth_Entry.get('1.0', 'end-1c'))  # Convert to int instead of float
     last_entered_number = last_entered_number / 100  # Divide by 100 to get the correct decimal place
     last_entered_number = "{:.2f}".format(last_entered_number)  # Format as a string with 2 decimal places
+    num_spaces = max(0, 27 - len(department) - len(str(last_entered_number))) # Calculate the number of spaces needed
     Fourth_Entry.delete('1.0', 'end')  # Add the start and end indices
     Fourth_Entry.insert('end', department)  # Insert the department
-    Fourth_Entry.insert("end", last_entered_number)
+    Fourth_Entry.insert('end', " " * num_spaces + last_entered_number)  
     Fourth_Entry.config(state='disabled')
     print(last_entered_number)
 
@@ -628,7 +633,7 @@ Button_00 = Button(
     image=button_image_32,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Fourth_Entry_input(00),
+    command=lambda: Fourth_Entry_input('00'),
     relief="flat",
 )
 Button_00.place(
@@ -787,7 +792,7 @@ Fourth_Entry = Text(
     bg="#D3EEFF",
     fg="#000716",
     highlightthickness=0,
-    font=("TkDefaultFont", 7),
+    font=("Merchant Copy DoubleSize", 6),
     state='disabled'
 )
 Fourth_Entry.place(
@@ -804,7 +809,7 @@ Last_Entry = Text(
     fg="#000716",
     highlightthickness=0,
     font=("TkDefaultFont", 7),
-    state='normal'
+    state='disabled'
 )
 Last_Entry.place(
     x=1069.0,
