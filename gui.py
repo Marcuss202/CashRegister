@@ -30,12 +30,21 @@ def Cash_Register_turn_on():
     Register_mode()
 
 def Fourth_Entry_input(number):
+    global Department_button_pressed
+    if Department_button_pressed == True:
+        Fourth_Entry.config(state='normal')
+        Fourth_Entry.delete('1.0', 'end')
+        # Fourth_Entry.insert('end', number)
+        Fourth_Entry.config(state='disabled')
+        Department_button_pressed = False
+
     Fourth_Entry.config(state='normal')
     Fourth_Entry.insert('end', number)
     Fourth_Entry.config(state='disabled')
 
 def Department_button_input(department):
-    global last_entered_number
+    global last_entered_number, Department_button_pressed
+    Department_button_pressed = True
     Fourth_Entry.config(state='normal')
     last_entered_number = int(Fourth_Entry.get('1.0', 'end-1c'))
     last_entered_number = last_entered_number / 100 
@@ -76,15 +85,14 @@ def Register_mode():
     Third_Entry.insert('end', " " * num_spaces_reg + "0.00")
     Third_Entry.config(state='disabled')
     
-
 def Total_amount():
-    global Total, num_spaces_reg, last_entered_number
+    global Total, num_spaces_reg, last_entered_number, Department_button_pressed
     last_entered_number = float(last_entered_number)
     Total = float(Total)
     Total = last_entered_number + Total
-    Total = "{:.2f}".format(Total)  # Format Total as a string with two decimal places
+    Total = "{:.2f}".format(Total)
     Third_Entry.config(state='normal')
-    num_spaces_reg = max(0, 18 - len("***TOTAL") - len(str(Total)))  # Adjust the number here as needed
+    num_spaces_reg = max(0, 18 - len("***TOTAL") - len(str(Total)))
     Third_Entry.delete('1.0', 'end')
     Third_Entry.insert('end', '***TOTAL')
     Third_Entry.insert('end', " " * num_spaces_reg + Total)
@@ -113,6 +121,7 @@ All_Modes = ["REG","PROG","REP"]
 mode = "REG"
 Total = 0
 last_entered_number = 0
+Department_button_pressed = False
 #---------- WINDOW -------------------------------------------------------------#
 
 window = Tk()
