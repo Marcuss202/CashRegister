@@ -736,13 +736,6 @@ button_38.place(
 
 #---------- ENTRY WIDGETS -------------------------------------------------------------#
 
-# entry_image_1 = PhotoImage(
-#     file=relative_to_assets("entry_1.png"))
-# entry_bg_1 = canvas.create_image(
-#     1152.0,
-#     336.5,
-#     image=entry_image_1
-# )
 Third_Entry = Text(
     canvas,
     bd=0,
@@ -758,13 +751,6 @@ Third_Entry.place(
     height=17.0
 )
 
-# entry_image_2 = PhotoImage(
-#     file=relative_to_assets("entry_2.png"))
-# entry_bg_2 = canvas.create_image(
-#     1152.0,
-#     317.0,
-#     image=entry_image_2
-# )
 Second_Entry = Text(
     canvas,
     bd=0,
@@ -780,13 +766,6 @@ Second_Entry.place(
     height=18.0
 )
 
-# entry_image_3 = PhotoImage(
-#     file=relative_to_assets("entry_3.png"))
-# entry_bg_3 = canvas.create_image(
-#     1152.0,
-#     297.5,
-#     image=entry_image_3
-# )
 Top_Entry = Text(
     canvas,
     bd=0,
@@ -802,50 +781,37 @@ Top_Entry.place(
     height=17.0
 )
 
-# entry_image_4 = PhotoImage(
-#     file=relative_to_assets("entry_4.png"))
-# entry_bg_4 = canvas.create_image(
-#     1152.0,
-#     361.0,
-#     image=entry_image_4
-# )
 Last_Entry = Text(
     canvas,
     bd=0,
     bg="#D3EEFF",
     fg="#000716",
     highlightthickness=0,
-    font=("TkDefaultFont", 5),
-    state='disabled'
+    font=("TkDefaultFont", 7),
+    state='normal'
 )
 Last_Entry.place(
     x=1069.0,
     y=356.0,
     width=166.0,
-    height=8.0
+    height=12.0
 )
 
-# entry_image_5 = PhotoImage(
-#     file=relative_to_assets("entry_5.png"))
-# entry_bg_5 = canvas.create_image(
-#     1152.0,
-#     351.0,
-#     image=entry_image_5
-# )
+
 Fourth_Entry = Text(
     canvas,
     bd=0,
     bg="#D3EEFF",
     fg="#000716",
     highlightthickness=0,
-    font=("TkDefaultFont", 5),
+    font=("TkDefaultFont", 7),
     state='disabled'
 )
 Fourth_Entry.place(
     x=1069.0,
     y=346.0,
     width=166.0,
-    height=8.0
+    height=12.0
 )
 
 #---------- END -------------------------------------------------------------#
