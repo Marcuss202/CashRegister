@@ -27,7 +27,7 @@ def Cash_Register_turn_on():
     Last_Entry.config(state='normal')
     Last_Entry.insert('end', 'REG')
     Last_Entry.config(state='disabled')
-    Reg_mode()
+    Register_mode()
 
 def Fourth_Entry_input(number):
     Fourth_Entry.config(state='normal')
@@ -35,6 +35,7 @@ def Fourth_Entry_input(number):
     Fourth_Entry.config(state='disabled')
 
 def Department_button_input(department):
+    global last_entered_number
     Fourth_Entry.config(state='normal')
     last_entered_number = int(Fourth_Entry.get('1.0', 'end-1c'))
     last_entered_number = last_entered_number / 100 
@@ -44,7 +45,7 @@ def Department_button_input(department):
     Fourth_Entry.insert('end', department)
     Fourth_Entry.insert('end', " " * num_spaces_dep + last_entered_number)  
     Fourth_Entry.config(state='disabled')
-    print(last_entered_number)
+    Total_amount()
 
 def Change_mode():
     global mode
@@ -66,7 +67,7 @@ def Program_button_input():
     Last_Entry.insert('end', mode)
     Last_Entry.config(state='disabled')
 
-def Reg_mode():
+def Register_mode():
     Third_Entry.config(state='normal')
     Third_Entry.config(bg="#51458B", fg="#FFFFFF")
     num_spaces_reg = max(0, 17 - len("***TOTAL") - len(str(0.00)))
@@ -74,11 +75,35 @@ def Reg_mode():
     Third_Entry.insert('end', '***TOTAL')
     Third_Entry.insert('end', " " * num_spaces_reg + "0.00")
     Third_Entry.config(state='disabled')
+    
+
+def Total_amount():
+    global Total, num_spaces_reg, last_entered_number
+    last_entered_number = float(last_entered_number)
+    Total = float(Total)
+    Total = last_entered_number + Total
+    Total = "{:.2f}".format(Total)  # Format Total as a string with two decimal places
+    Third_Entry.config(state='normal')
+    num_spaces_reg = max(0, 18 - len("***TOTAL") - len(str(Total)))  # Adjust the number here as needed
+    Third_Entry.delete('1.0', 'end')
+    Third_Entry.insert('end', '***TOTAL')
+    Third_Entry.insert('end', " " * num_spaces_reg + Total)
+    Third_Entry.config(state='disabled')
+
+def Program_mode():
+    pass
+
+def Report_mode():
+    pass
 
 def mode_operator():
     global mode
     if mode == "REG":
-        Reg_mode()
+        Register_mode()
+    elif mode == "PROG":
+        Program_mode()
+    elif mode == "REP":
+        Report_mode()
 
 
     
@@ -86,7 +111,8 @@ def mode_operator():
 
 All_Modes = ["REG","PROG","REP"]
 mode = "REG"
-
+Total = 0
+last_entered_number = 0
 #---------- WINDOW -------------------------------------------------------------#
 
 window = Tk()
