@@ -7,7 +7,7 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
 import pyglet
 
 # replace 'font.ttf' with your ttf file 
@@ -21,7 +21,13 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"D:\GitHub\CashRegister\CashRegister\.git\buil
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+
 #---------- FUNCTIONS -------------------------------------------------------------#
+
+def Cash_Register_turn_on():
+    Last_Entry.config(state='normal')
+    Last_Entry.insert('end', 'REG')
+    Last_Entry.config(state='disabled')
 
 def Fourth_Entry_input(number):
     Fourth_Entry.config(state='normal')  # Editable mode
@@ -40,7 +46,31 @@ def Department_button_input(department):
     Fourth_Entry.config(state='disabled')
     print(last_entered_number)
 
+def Change_mode():
+    global mode  # Declare mode as global so we can modify it
+    mode_index = All_Modes.index(mode)  # Get the current index of mode
+    mode_index = (mode_index + 1) % len(All_Modes)  # Increment the index and wrap around if necessary
+    mode = All_Modes[mode_index]  # Update mode
+    # Update Last_Entry
+    Last_Entry.config(state='normal')
+    Last_Entry.delete('1.0', 'end')
+    Last_Entry.insert('end', mode)
+    Last_Entry.config(state='disabled')
+
+def Program_button_input():
+    global mode, mode_index
+    mode_index = 1
+    mode = All_Modes[mode_index]
+    Last_Entry.config(state='normal')  # Uncomment this line
+    Last_Entry.delete('1.0', 'end')  # Delete existing content
+    Last_Entry.insert('end', mode)  # Insert new mode
+    Last_Entry.config(state='disabled')
+
     
+#---------- GLOBAL VARIABLES -------------------------------------------------------------#
+
+All_Modes = ["REG","PROG","REP"]
+mode = "REG"
 
 #---------- WINDOW -------------------------------------------------------------#
 
@@ -200,7 +230,7 @@ button_5 = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Prog"),
+    command=lambda: Program_button_input(),
     relief="flat"
 )
 button_5.place(
@@ -329,7 +359,7 @@ button_13 = Button(
     image=button_image_13,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Mode"),
+    command=lambda: Change_mode(),
     relief="flat"
 )
 button_13.place(
@@ -818,8 +848,9 @@ Last_Entry.place(
     height=12.0
 )
 
+# --------- AUTO RUN CODE -------------------------------------------------------------#
 
-
+Cash_Register_turn_on()
 
 #---------- END -------------------------------------------------------------#
 
