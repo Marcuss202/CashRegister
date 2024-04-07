@@ -34,12 +34,17 @@ def Fourth_Entry_input(number):
     if Department_button_pressed == True:
         Fourth_Entry.config(state='normal')
         Fourth_Entry.delete('1.0', 'end')
+        Fourth_Entry.insert('end', number)
         Fourth_Entry.config(state='disabled')
         Department_button_pressed = False
-
-    Fourth_Entry.config(state='normal')
-    Fourth_Entry.insert('end', number)
-    Fourth_Entry.config(state='disabled')
+    elif X_time_button_pressed == True:
+        Fourth_Entry.config(state='normal')
+        Fourth_Entry.insert('end', number)
+        Fourth_Entry.config(state='disabled')
+    else:
+        Fourth_Entry.config(state='normal')
+        Fourth_Entry.insert('end', number)
+        Fourth_Entry.config(state='disabled')
 
 def Department_button_input(department):
     global last_entered_number, Department_button_pressed
@@ -64,8 +69,9 @@ def Department_button_input(department):
 
 def First_Entry_input():
     global last_entered_number, How_many_bought, num_spaces_first_entry, X_Cost
-    X_Cost = float(last_entered_number) * int(How_many_bought)  # Convert last_entered_number to float before multiplication
-    X_Cost = str(X_Cost)  # Convert X_Cost to string after multiplication
+    X_Cost = float(last_entered_number) * int(How_many_bought)
+    X_Cost = "{:.2f}".format(X_Cost)
+    X_Cost = str(X_Cost)
     First_Entry.config(state='normal')
     How_many_bought = str(How_many_bought)
     How_many_bought = str(How_many_bought+"x"+last_entered_number)
@@ -107,10 +113,15 @@ def Register_mode():
     Third_Entry.config(state='disabled')
     
 def Total_amount():
-    global Total, num_spaces_reg, last_entered_number, Department_button_pressed
+    global Total, num_spaces_reg, last_entered_number, Department_button_pressed, X_Cost, X_time_button_pressed
     last_entered_number = float(last_entered_number)
     Total = float(Total)
-    Total = last_entered_number + Total
+    X_Cost = float(X_Cost)
+    if X_time_button_pressed == True:
+        Total = X_Cost + Total
+        X_time_button_pressed = False
+    else:
+        Total = last_entered_number + Total
     Total = "{:.2f}".format(Total)
     Third_Entry.config(state='normal')
     num_spaces_reg = max(0, 18 - len("***TOTAL") - len(str(Total)))
@@ -120,7 +131,8 @@ def Total_amount():
     Third_Entry.config(state='disabled')
 
 def X_time():
-    global last_entered_number, How_many_bought, X_Cost
+    global last_entered_number, How_many_bought, X_Cost, X_time_button_pressed
+    X_time_button_pressed = True
     last_entered_number = float(last_entered_number)
     How_many_bought = Fourth_Entry.get('1.0', 'end-1c')
     X_Cost = last_entered_number * int(How_many_bought)
@@ -156,6 +168,7 @@ mode = "REG"
 Total = 0
 last_entered_number = 0
 Department_button_pressed = False
+X_time_button_pressed = False
 How_many_bought = 1
 X_Cost = 1
 
