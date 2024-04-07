@@ -10,11 +10,11 @@ from pathlib import Path
 from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
 import pyglet
 
-pyglet.font.add_file('D:\\GitHub\\CashRegister\\merchant-copy-doublesize.ttf')
+pyglet.font.add_file("D:\/GitHub\/CashRegister\/Merchant_Copy_Doublesize.ttf")
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"D:\GitHub\CashRegister\CashRegister\.git\build\assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r"D:\GitHub\CashRegister\.git\build\assets\frame0")
 
 
 def relative_to_assets(path: str) -> Path:
