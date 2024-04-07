@@ -34,7 +34,6 @@ def Fourth_Entry_input(number):
     if Department_button_pressed == True:
         Fourth_Entry.config(state='normal')
         Fourth_Entry.delete('1.0', 'end')
-        # Fourth_Entry.insert('end', number)
         Fourth_Entry.config(state='disabled')
         Department_button_pressed = False
 
@@ -52,9 +51,31 @@ def Department_button_input(department):
     num_spaces_dep = max(0, 27 - len(department) - len(str(last_entered_number)))
     Fourth_Entry.delete('1.0', 'end')
     Fourth_Entry.insert('end', department)
+
+    Second_Entry.config(state='normal')
+    Second_Entry.delete('1.0', 'end')
+    Second_Entry.insert('end', department)
+    Second_Entry.config(state='disabled')
+
     Fourth_Entry.insert('end', " " * num_spaces_dep + last_entered_number)  
     Fourth_Entry.config(state='disabled')
+    First_Entry_input()
     Total_amount()
+
+def First_Entry_input():
+    global last_entered_number, How_many_bought, num_spaces_first_entry, X_Cost
+    X_Cost = float(last_entered_number) * int(How_many_bought)  # Convert last_entered_number to float before multiplication
+    X_Cost = str(X_Cost)  # Convert X_Cost to string after multiplication
+    First_Entry.config(state='normal')
+    How_many_bought = str(How_many_bought)
+    How_many_bought = str(How_many_bought+"x"+last_entered_number)
+    First_Entry.delete('1.0', 'end')
+    First_Entry.insert('end', How_many_bought)
+    num_spaces_first_entry = max(0, 20 - len(How_many_bought) - len(str(last_entered_number)))
+    First_Entry.insert('end', " " * num_spaces_first_entry + X_Cost)
+    First_Entry.config(state='disabled')
+    How_many_bought = 1
+
 
 def Change_mode():
     global mode
@@ -98,6 +119,19 @@ def Total_amount():
     Third_Entry.insert('end', " " * num_spaces_reg + Total)
     Third_Entry.config(state='disabled')
 
+def X_time():
+    global last_entered_number, How_many_bought, X_Cost
+    last_entered_number = float(last_entered_number)
+    How_many_bought = Fourth_Entry.get('1.0', 'end-1c')
+    X_Cost = last_entered_number * int(How_many_bought)
+    Fourth_Entry.config(state='normal')
+    Fourth_Entry.delete('1.0', 'end')
+    Fourth_Entry.config(state='disabled')
+
+
+
+
+
 def Program_mode():
     pass
 
@@ -122,6 +156,9 @@ mode = "REG"
 Total = 0
 last_entered_number = 0
 Department_button_pressed = False
+How_many_bought = 1
+X_Cost = 1
+
 #---------- WINDOW -------------------------------------------------------------#
 
 window = Tk()
@@ -377,7 +414,7 @@ button_11 = Button(
     image=button_image_11,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("X/Time (X)"),
+    command=lambda: X_time(),
     relief="flat"
 )
 button_11.place(
@@ -821,15 +858,16 @@ button_38.place(
 
 #---------- ENTRY WIDGETS -------------------------------------------------------------#
 
-Top_Entry = Text(
+First_Entry = Text(
     canvas,
     bd=0,
     bg="#D3EEFF",
     fg="#000716",
     highlightthickness=0,
+    font=("Merchant Copy DoubleSize", 8),
     state='disabled'
 )
-Top_Entry.place(
+First_Entry.place(
     x=1069.0,
     y=288.0,
     width=166.0,
@@ -842,6 +880,7 @@ Second_Entry = Text(
     bg="#D3EEFF",
     fg="#000716",
     highlightthickness=0,
+    font=("Merchant Copy DoubleSize", 8),
     state='disabled'
 )
 Second_Entry.place(
