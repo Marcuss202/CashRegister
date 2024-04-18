@@ -185,13 +185,13 @@ def mode_operator():
 
 def CASH_button_input():
     global Cash_given, Total
-    # if len(Fourth_Entry) == 0:
-    #     error_message()
-    # else:
-    Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
-    Cash_given = Cash_given / 100 
-    Cash_given = "{:.2f}".format(Cash_given)
-    Cash_button_pressed()
+    if len(Fourth_Entry) == 0:
+        error_message()
+    else:
+        Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
+        Cash_given = Cash_given / 100 
+        Cash_given = "{:.2f}".format(Cash_given)
+        Cash_button_pressed()
 
 def Cash_button_pressed():
     global Cash_given, Total, num_spaces_change, Total, Change, num_spaces_given
