@@ -2,6 +2,7 @@
 from pathlib import Path
 
 # from tkinter import *
+from time import sleep
 from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
 import pyglet
 
@@ -48,7 +49,7 @@ def Fourth_Entry_input(number):
 def Department_button_input(department):
     global last_entered_number, Department_button_pressed
     if mode == "PROG":
-        pass
+        error_message()
     else:
         Department_button_pressed = True
         Fourth_Entry.config(state='normal')
@@ -213,24 +214,32 @@ def clear_screen():
     Fourth_Entry.delete('1.0', 'end')
     Fourth_Entry.config(state='disabled')
 
-# def hide_screen():
-#     First_Entry.pack_forget()
-#     Second_Entry.pack_forget()
-#     Third_Entry.pack_forget()
-#     Fourth_Entry.pack_forget()
+def hide_screen():
+    First_Entry.place_forget()
+    Second_Entry.place_forget()
+    Third_Entry.place_forget()
+    Fourth_Entry.place_forget()
 
-# def unhide_screen():
-#     First_Entry.pack()
-#     Second_Entry.pack()
-#     Third_Entry.pack()
-#     Fourth_Entry.pack()
+def unhide_screen():
+    First_Entry.place(x=1069.0, y=288.0, width=166.0, height=17.0 )
+    Second_Entry.place(x=1069.0, y=307.0, width=166.0, height=18.0)
+    Third_Entry.place(x=1069.0, y=327.0, width=166.0, height=17.0)
+    Fourth_Entry.place(x=1069.0, y=346.0, width=166.0, height=12.0)
+    Last_Entry.place(x=1069.0, y=356.0, width=166.0, height=12.0)
 
-# def error_message():
-#     hide_screen()
-#     Third_Entry_ERROR.config(state='normal')
-#     Third_Entry_ERROR.insert('end', 'ERROR')
-#     Third_Entry_ERROR.config(state='disabled')
-#     unhide_screen()
+def hide_error_message():
+    Third_Entry_ERROR.config(state='normal')
+    Third_Entry_ERROR.delete('1.0', 'end')
+    Third_Entry_ERROR.place_forget()
+    unhide_screen()
+
+def error_message():
+    hide_screen()
+    Third_Entry_ERROR.place(x=1069.0, y=327.0, width=166.0, height=17.0)
+    Third_Entry_ERROR.config(state='normal')
+    Third_Entry_ERROR.insert('end', 'ERROR  ')
+    Third_Entry_ERROR.config(state='disabled')
+    window.after(3000, hide_error_message)
 
 
 #---------- WINDOW -------------------------------------------------------------#
