@@ -104,6 +104,9 @@ def Program_button_input():
     Last_Entry.config(state='disabled')
 
 def Register_mode():
+    global Total
+    clear_screen()
+    Total = 0
     Third_Entry.config(state='normal')
     Third_Entry.config(bg="#51458B", fg="#FFFFFF")
     num_spaces_reg = max(0, 17 - len("***TOTAL") - len(str(0.00)))
@@ -145,10 +148,48 @@ def X_time():
 
 
 def Program_mode():
-    pass
+    global Programmable_buttons, current_index
+    clear_screen()
+    First_Entry.config(state='normal')
+    First_Entry.insert('end', 'Program Mode:')
+    First_Entry.config(state='disabled')
+    Third_Entry.config(state='normal')
+    
+
+    # # Initialize current_index outside the loop
+    # current_index = 0
+    
+    # # Create a dictionary of departments
+    # departments = {
+    #     'Dept1': 'TOYS',
+    #     'Dept2': 'CLOTHES',
+    #     'Dept3': 'FOOD',
+    #     'Dept4': 'ELECTRONICS',
+    #     'Dept5': 'OTHERS'
+    # }
+
+    # # Iterate over the dictionary
+    # for i, (dept, value) in enumerate(departments.items()):
+    #     Second_Entry.config(state='normal')
+    #     # Display the key and value
+    #     Second_Entry.insert('end', f"{dept}: {value}\n")
+    #     Second_Entry.config(state='disabled')
+    #     Third_Entry.bind('<Return>', Next_Programmable_button)
+    
+    # def Next_Programmable_button(event):
+    #     global Programmable_buttons, current_index
+    #     # Store the entered name in Programmable_buttons
+    #     Programmable_buttons[current_index] = Third_Entry.get('1.0', 'end-1c')
+    #     # Clear Third_Entry
+    #     Third_Entry.delete('1.0', 'end')
+    #     # Move to the next department
+    #     current_index += 1
+    #     if current_index < len(Programmable_buttons):
+    #         Third_Entry.insert('end', Programmable_buttons[current_index])
+    
 
 def Report_mode():
-    pass
+    clear_screen()
 
 def mode_operator():
     global mode
@@ -164,6 +205,7 @@ def mode_operator():
 #---------- GLOBAL VARIABLES -------------------------------------------------------------#
 
 All_Modes = ["REG","PROG","REP"]
+
 mode = "REG"
 Total = 0
 last_entered_number = 0
@@ -171,6 +213,32 @@ Department_button_pressed = False
 X_time_button_pressed = False
 How_many_bought = 1
 X_Cost = 1
+current_index = 0
+
+Dept1 = "TOYS"
+Dept2 = "CLOTHES"
+Dept3 = "FOOD"
+Dept4 = "ELECTRONICS"
+Dept5 = "OTHERS"
+
+
+
+#---------- EXTRA def -------------------------------------------------------------#
+
+def clear_screen():
+    First_Entry.config(state='normal')
+    First_Entry.delete('1.0', 'end')
+    First_Entry.config(state='disabled')
+    Second_Entry.config(state='normal')
+    Second_Entry.delete('1.0', 'end')
+    Second_Entry.config(state='disabled')
+    Third_Entry.config(state='normal')
+    Third_Entry.delete('1.0', 'end')
+    Third_Entry.config(bg="#D3EEFF", fg="#000000")
+    Third_Entry.config(state='disabled')
+    Fourth_Entry.config(state='normal')
+    Fourth_Entry.delete('1.0', 'end')
+    Fourth_Entry.config(state='disabled')
 
 #---------- WINDOW -------------------------------------------------------------#
 
@@ -342,14 +410,14 @@ button_5.place(
 
 button_image_6 = PhotoImage(
     file=relative_to_assets("button_6.png"))
-button_6 = Button(
+Dept5_button = Button(
     image=button_image_6,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Department_button_input("GROCERYS"),
+    command=lambda: Department_button_input(Dept5),
     relief="flat"
 )
-button_6.place(
+Dept5_button.place(
     x=1018.0,
     y=498.0,
     width=53.0,
@@ -359,14 +427,14 @@ button_6.place(
 
 button_image_7 = PhotoImage(
     file=relative_to_assets("button_7.png"))
-button_7 = Button(
+Dept4_button = Button(
     image=button_image_7,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Department_button_input("CLOTHES"),
+    command=lambda: Department_button_input(Dept4),
     relief="flat"
 )
-button_7.place(
+Dept4_button.place(
     x=1018.0,
     y=548.0,
     width=53.0,
@@ -375,14 +443,14 @@ button_7.place(
 
 button_image_8 = PhotoImage(
     file=relative_to_assets("button_8.png"))
-button_8 = Button(
+Dept3_button = Button(
     image=button_image_8,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Department_button_input("ELECTRONICS"),
+    command=lambda: Department_button_input(Dept3),
     relief="flat"
 )
-button_8.place(
+Dept3_button.place(
     x=1018.0,
     y=596.0,
     width=53.0,
@@ -391,14 +459,14 @@ button_8.place(
 
 button_image_9 = PhotoImage(
     file=relative_to_assets("button_9.png"))
-button_9 = Button(
+Dept2_button = Button(
     image=button_image_9,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Department_button_input("MISC"),
+    command=lambda: Department_button_input(Dept2),
     relief="flat"
 )
-button_9.place(
+Dept2_button.place(
     x=1018.0,
     y=644.0,
     width=53.0,
@@ -407,14 +475,14 @@ button_9.place(
 
 button_image_10 = PhotoImage(
     file=relative_to_assets("button_10.png"))
-button_10 = Button(
+Dept1_button = Button(
     image=button_image_10,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Dept.1"),
+    command=lambda: Department_button_input(Dept1),
     relief="flat"
 )
-button_10.place(
+Dept1_button.place(
     x=1018.0,
     y=693.0,
     width=53.0,
@@ -954,6 +1022,7 @@ Last_Entry.place(
 # --------- AUTO RUN CODE -------------------------------------------------------------#
 
 Cash_Register_turn_on()
+Programmable_buttons = ["Dept1", "Dept2", "Dept3", "Dept4"]
 
 #---------- END -------------------------------------------------------------#
 
