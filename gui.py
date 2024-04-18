@@ -189,10 +189,10 @@ How_many_bought = 1
 X_Cost = 1
 current_index = 0
 
-Dept1 = "TOYS"
+Dept1 = "FOOD"
 Dept2 = "CLOTHES"
-Dept3 = "FOOD"
-Dept4 = "ELECTRONICS"
+Dept3 = "ELECTRONICS"
+Dept4 = "TOYS"
 Dept5 = "OTHERS"
 
 
