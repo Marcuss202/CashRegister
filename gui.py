@@ -7,6 +7,7 @@ from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVa
 import pyglet
 
 pyglet.font.add_file("D:\GitHub\CashRegister\Merchant_Copy_Doublesize.ttf")
+pyglet.font.add_file("D:\GitHub\CashRegister\Open 24 Display St.ttf")
 
 
 
@@ -86,6 +87,7 @@ def First_Entry_input():
     How_many_bought = 1
 
 
+
 def Change_mode():
     global mode
     mode_index = All_Modes.index(mode)
@@ -95,6 +97,11 @@ def Change_mode():
     Last_Entry.delete('1.0', 'end')
     Last_Entry.insert('end', mode)
     Last_Entry.config(state='disabled')
+    mode_operator()
+
+def mode_operator():
+    # Add your code for the mode_operator function here
+    pass
     mode_operator()
 
 def Program_button_input():
@@ -174,7 +181,38 @@ def mode_operator():
     elif mode == "REP":
         Report_mode()
 
+#---------- CASH BUTTON -------------------------------------------------------------#
 
+def CASH_button_input():
+    global Cash_given, Total
+    # if len(Fourth_Entry) == 0:
+    #     error_message()
+    # else:
+    Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
+    Cash_given = Cash_given / 100 
+    Cash_given = "{:.2f}".format(Cash_given)
+    Cash_button_pressed()
+
+def Cash_button_pressed():
+    global Cash_given, Total, num_spaces_change, Total, Change, num_spaces_given
+    clear_screen()
+    Change = float(Cash_given) - float(Total)
+    Change = "{:.2f}".format(Change)
+
+    First_Entry.config(state='normal')
+    num_spaces_change = max(0, 20 - len("CASH") - len(Cash_given))
+    First_Entry.delete('1.0', 'end')
+    First_Entry.insert('end', 'CASH')
+    First_Entry.insert('end', " " * num_spaces_change + Cash_given)
+    First_Entry.config(state='disabled')
+
+    Third_Entry.config(state='normal')
+    Third_Entry.config(bg="#51458B", fg="#FFFFFF")
+    num_spaces_change = max(0, 17 - len("CHANGE") - len(Change))
+    Third_Entry.delete('1.0', 'end')
+    Third_Entry.insert('end', 'CHANGE')
+    Third_Entry.insert('end', " " * num_spaces_change + Change)
+    Third_Entry.config(state='disabled')
     
 #---------- GLOBAL VARIABLES -------------------------------------------------------------#
 
@@ -929,7 +967,7 @@ button_38 = Button(
     image=button_image_38,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Cash"),
+    command=lambda: CASH_button_input(),
     relief="flat"
 )
 button_38.place(
