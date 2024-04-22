@@ -191,33 +191,44 @@ def mode_operator():
 #---------- CASH BUTTON -------------------------------------------------------------#
 
 def CASH_button_input():
-    global Cash_given, Total
+    global Cash_given, Total, Change, num_spaces_change, last_entered_number
     Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
     Cash_given = Cash_given / 100 
     Cash_given = "{:.2f}".format(Cash_given)
-    Cash_button_pressed()
+    if Cash_given < Total:
+        error_message()
+    else:
+        clear_screen()
+        Change = float(Cash_given) - float(Total)
+        Change = "{:.2f}".format(Change)
 
-def Cash_button_pressed():
-    global Cash_given, Total, num_spaces_change, Total, Change
-    clear_screen()
-    Change = float(Cash_given) - float(Total)
-    Change = "{:.2f}".format(Change)
+        First_Entry.config(state='normal')
+        num_spaces_change = max(0, 20 - len("CASH") - len(Cash_given))
+        First_Entry.delete('1.0', 'end')
+        First_Entry.insert('end', 'CASH')
+        First_Entry.insert('end', " " * num_spaces_change + Cash_given)
+        First_Entry.config(state='disabled')
 
-    First_Entry.config(state='normal')
-    num_spaces_change = max(0, 20 - len("CASH") - len(Cash_given))
-    First_Entry.delete('1.0', 'end')
-    First_Entry.insert('end', 'CASH')
-    First_Entry.insert('end', " " * num_spaces_change + Cash_given)
-    First_Entry.config(state='disabled')
+        Third_Entry.config(state='normal')
+        Third_Entry.config(bg="#51458B", fg="#FFFFFF")
+        num_spaces_change = max(0, 17 - len("CHANGE") - len(Change))
+        Third_Entry.delete('1.0', 'end')
+        Third_Entry.insert('end', 'CHANGE')
+        Third_Entry.insert('end', " " * num_spaces_change + Change)
+        Third_Entry.config(state='disabled')
 
-    Third_Entry.config(state='normal')
-    Third_Entry.config(bg="#51458B", fg="#FFFFFF")
-    num_spaces_change = max(0, 17 - len("CHANGE") - len(Change))
-    Third_Entry.delete('1.0', 'end')
-    Third_Entry.insert('end', 'CHANGE')
-    Third_Entry.insert('end', " " * num_spaces_change + Change)
-    Third_Entry.config(state='disabled')
+        Receipt_print()
 
+
+def Receipt_print(): #45 letters in one line
+    global Total, Cash_given, Change
+    Receipt_Entry.config(state='normal')
+    Receipt_Entry.insert('end', '\n')
+    Receipt_Entry.insert('end', '                CASH RECEIPT\n')
+    Receipt_Entry.insert('end', '\n')
+    Receipt_Entry.insert('end', '*************************************************\n')
+    Receipt_Entry.insert('end', 'Date:')
+    Receipt_Entry.config(state='disabled')
 
     
 #---------- GLOBAL VARIABLES -------------------------------------------------------------#
@@ -370,6 +381,14 @@ image_8 = canvas.create_image(
     1156.3935546875,
     731.5860595703125,
     image=image_image_8
+)
+
+receipt_image = PhotoImage(
+    file=relative_to_assets("Receipt.png"))
+image_receipt = canvas.create_image(
+    1595,
+    545.0,
+    image=receipt_image
 )
 
 #---------- BUTTONS -------------------------------------------------------------#
@@ -1074,14 +1093,23 @@ Third_Entry_ERROR = Text(
     font=("Merchant Copy DoubleSize", 8, "bold"),
     state='disabled'
 )
-# Third_Entry_ERROR.place(
-#     x=1069.0,
-#     y=327.0,
-#     width=166.0,
-#     height=17.0
-# )
-Third_Entry_ERROR.pack_forget()  # This will make the widget invisible by default
+Third_Entry_ERROR.pack_forget() 
 
+Receipt_Entry = Text(
+    canvas,
+    bd=0,
+    bg="#EEEEEE",
+    highlightthickness=0,
+    font=("Merchant Copy DoubleSize", 8, "bold"),
+    state='disabled'
+)
+
+Receipt_Entry.place(
+    x=1394,
+    y=121,
+    width=410,
+    height=844,
+)
 # --------- AUTO RUN CODE -------------------------------------------------------------#
 
 Cash_Register_turn_on()
