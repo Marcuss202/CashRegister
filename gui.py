@@ -154,7 +154,14 @@ def X_time():
     Fourth_Entry.delete('1.0', 'end')
     Fourth_Entry.config(state='disabled')
 
-
+def Clear_button_input():
+    global Department_button_pressed
+    if Department_button_pressed == False:
+        Fourth_Entry.config(state="normal")
+        Fourth_Entry.delete('1.0', 'end')
+        Fourth_Entry.config(state="disabled")
+    else:
+        error_message()
 
 
 
@@ -210,6 +217,8 @@ def Cash_button_pressed():
     Third_Entry.insert('end', 'CHANGE')
     Third_Entry.insert('end', " " * num_spaces_change + Change)
     Third_Entry.config(state='disabled')
+
+
     
 #---------- GLOBAL VARIABLES -------------------------------------------------------------#
 
@@ -371,7 +380,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Clear"),
+    command=lambda: Clear_button_input(),
     relief="flat",
 )
 button_1.place(
