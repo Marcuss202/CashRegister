@@ -3,12 +3,12 @@ from pathlib import Path
 
 # from tkinter import *
 from time import sleep
+from datetime import date
 from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
 import pyglet
 
 pyglet.font.add_file("D:\GitHub\CashRegister\Merchant_Copy_Doublesize.ttf")
 pyglet.font.add_file("D:\GitHub\CashRegister\Open 24 Display St.ttf")
-
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -134,6 +134,7 @@ def Total_amount():
     if X_time_button_pressed == True:
         Total = X_Cost + Total
         X_time_button_pressed = False
+
     else:
         Total = last_entered_number + Total
     Total = "{:.2f}".format(Total)
@@ -153,6 +154,24 @@ def X_time():
     Fourth_Entry.config(state='normal')
     Fourth_Entry.delete('1.0', 'end')
     Fourth_Entry.config(state='disabled')
+
+def minus_percent():
+    global Total, percent_button_pressed, How_many_percent, last_entered_number, X_Cost, new_price
+    if Department_button_pressed == True:
+        error_message()
+    else:
+        How_many_percent = Fourth_Entry.get('1.0', 'end-1c')
+        new_price = X_Cost - (X_Cost * (int(How_many_percent) / 100))
+        Fourth_Entry.config(state='normal')
+        Fourth_Entry.delete('1.0', 'end')
+        Fourth_Entry.config(state='disabled')
+        First_Entry_input()
+
+def Subtotal_button_input():
+    Subtotal_Entry.config(state='normal')
+    Subtotal_Entry.delete('1.0', 'end')
+    Subtotal_Entry.insert('end', Total)
+    Subtotal_Entry.config(state='disabled')
 
 def Clear_button_input():
     global Department_button_pressed
@@ -219,16 +238,24 @@ def CASH_button_input():
 
         Receipt_print()
 
-
 def Receipt_print(): #45 letters in one line
     global Total, Cash_given, Change
-    Receipt_Entry.config(state='normal')
-    Receipt_Entry.insert('end', '\n')
-    Receipt_Entry.insert('end', '                CASH RECEIPT\n')
-    Receipt_Entry.insert('end', '\n')
-    Receipt_Entry.insert('end', '*************************************************\n')
-    Receipt_Entry.insert('end', 'Date:')
-    Receipt_Entry.config(state='disabled')
+    Receipt_Entry_header.config(state='normal')
+    Receipt_Entry_header.insert('end', '\n')
+    Receipt_Entry_header.insert('end', '                CASH RECEIPT\n')
+    Receipt_Entry_header.insert('end', '\n')
+    Receipt_Entry_header.insert('end', '*************************************************\n')
+    Receipt_Entry_header.insert('end', '\n')
+    Receipt_Entry_header.insert('end', 'Date: {}\n'.format(date.today()))
+    Receipt_Entry_header.insert('end', '---------------------------------------------\n')
+    Receipt_Entry_header.config(state='disabled')
+
+
+    Receipt_Entry_footer.config(state='normal')
+    Receipt_Entry_footer.insert('end', '*************************************************\n')
+    Receipt_Entry_footer.insert('end', '\n')
+    Receipt_Entry_footer.insert('end', "      Thank you for shopping with us!\n")
+    Receipt_Entry_footer.config(state='disabled')
 
     
 #---------- GLOBAL VARIABLES -------------------------------------------------------------#
@@ -240,6 +267,7 @@ Total = 0
 last_entered_number = 0
 Department_button_pressed = False
 X_time_button_pressed = False
+procent_button_pressed = False
 How_many_bought = 1
 X_Cost = 1
 current_index = 0
@@ -672,7 +700,7 @@ button_18 = Button(
     image=button_image_18,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("-%"),
+    command=lambda: minus_percent(),
     relief="flat"
 )
 button_18.place(
@@ -976,7 +1004,7 @@ button_37 = Button(
     image=button_image_37,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Subtotal"),
+    command=lambda: Subtotal_button_input(),
     relief="flat"
 )
 button_37.place(
@@ -1095,7 +1123,7 @@ Third_Entry_ERROR = Text(
 )
 Third_Entry_ERROR.pack_forget() 
 
-Receipt_Entry = Text(
+Receipt_Entry_header = Text(
     canvas,
     bd=0,
     bg="#EEEEEE",
@@ -1104,11 +1132,60 @@ Receipt_Entry = Text(
     state='disabled'
 )
 
-Receipt_Entry.place(
+Receipt_Entry_header.place(
     x=1394,
     y=121,
     width=410,
     height=844,
+)
+
+# Receipt_Entry = Text(
+#     canvas,
+#     bd=0,
+#     bg="#EEEEEE",
+#     highlightthickness=0,
+#     font=("Merchant Copy DoubleSize", 8, "bold"),
+#     state='disabled'
+# )
+
+# Receipt_Entry.place(
+#     x=1394,
+#     y=88,
+#     width=410,
+#     height=165,
+# )
+
+Receipt_Entry_footer = Text(
+    canvas,
+    bd=0,
+    bg="#EEEEEE",
+    highlightthickness=0,
+    font=("Merchant Copy DoubleSize", 8, "bold"),
+    state='disabled'
+)
+
+Receipt_Entry_footer.place(
+    x=1394,
+    y=889,
+    width=410,
+    height=76,
+)
+
+Subtotal_Entry = Text(
+    canvas,
+    bd=0,
+    bg="#000000",
+    fg="#93BA34",
+    highlightthickness=0,
+    font=("Open 24 Display St", 28),
+    state='disabled'
+)
+
+Subtotal_Entry.place(
+    x=1036,
+    y=113,
+    width=188,
+    height=44,
 )
 # --------- AUTO RUN CODE -------------------------------------------------------------#
 
