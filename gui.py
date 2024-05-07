@@ -211,6 +211,7 @@ def mode_operator():
 
 def CASH_button_input():
     global Cash_given, Total, Change, num_spaces_change, last_entered_number
+    Subtotal_button_input()
     Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
     Cash_given = Cash_given / 100 
     Cash_given = "{:.2f}".format(Cash_given)
@@ -1139,21 +1140,7 @@ Receipt_Entry_header.place(
     height=844,
 )
 
-# Receipt_Entry = Text(
-#     canvas,
-#     bd=0,
-#     bg="#EEEEEE",
-#     highlightthickness=0,
-#     font=("Merchant Copy DoubleSize", 8, "bold"),
-#     state='disabled'
-# )
 
-# Receipt_Entry.place(
-#     x=1394,
-#     y=88,
-#     width=410,
-#     height=165,
-# )
 
 Receipt_Entry_footer = Text(
     canvas,
