@@ -167,31 +167,32 @@ def minus_percent():
     else:
         procent_button_pressed = True
         Inputed_last_discount = int(Fourth_Entry.get('1.0', 'end-1c'))  # gets last entered 10%
-        How_many_percent = Inputed_last_discount / 100 #percent in 0.10 format
-        money_saved = last_entered_number * How_many_percent
-        new_price = float(last_entered_number) - float(money_saved)
-        money_saved = "{:.2f}".format(money_saved)
-        print(last_entered_number, How_many_percent, new_price)
+        if Inputed_last_discount < 0 or Inputed_last_discount > 100:
+            error_message()
+        else:
+            How_many_percent = Inputed_last_discount / 100 #percent in 0.10 format
+            money_saved = last_entered_number * How_many_percent
+            new_price = float(last_entered_number) - float(money_saved)
+            money_saved = "{:.2f}".format(money_saved)
 
-        clear_screen()
-        First_Entry.config(state='normal')
-        num_spaces_first_entry = max(0, 20 - len(str(Inputed_last_discount) + "%" + "-"))
-        First_Entry.insert('end', " " * num_spaces_first_entry + "-" + str(Inputed_last_discount) + "%")
-        First_Entry.config(state='disabled')
+            clear_screen()
+            First_Entry.config(state='normal')
+            num_spaces_first_entry = max(0, 20 - len(str(Inputed_last_discount) + "%" + "-"))
+            First_Entry.insert('end', " " * num_spaces_first_entry + "-" + str(Inputed_last_discount) + "%")
+            First_Entry.config(state='disabled')
 
-        Second_Entry.config(state='normal')
-        Second_Entry.insert('end', "-%")
-        num_spaces_second_entry = max(0, 20 - len("-%") - len("-" + str(money_saved)))
-        Second_Entry.insert('end', " " * num_spaces_second_entry + "-" + money_saved)
-        Second_Entry.config(state='disabled')
+            Second_Entry.config(state='normal')
+            Second_Entry.insert('end', "-%")
+            num_spaces_second_entry = max(0, 20 - len("-%") - len("-" + str(money_saved)))
+            Second_Entry.insert('end', " " * num_spaces_second_entry + "-" + money_saved)
+            Second_Entry.config(state='disabled')
 
-        Fourth_Entry.config(state='normal')
-        Fourth_Entry.insert('end', "-%")
-        num_spaces_second_entry = max(0, 27 - len("-%") - len("-" + str(money_saved)))
-        Fourth_Entry.insert('end', " " * num_spaces_second_entry + "-" + money_saved)
-        Fourth_Entry.config(state='disabled')
-
-        Total_amount()
+            Fourth_Entry.config(state='normal')
+            Fourth_Entry.insert('end', "-%")
+            num_spaces_second_entry = max(0, 27 - len("-%") - len("-" + str(money_saved)))
+            Fourth_Entry.insert('end', " " * num_spaces_second_entry + "-" + money_saved)
+            Fourth_Entry.config(state='disabled')
+            Total_amount()
 
 
 
