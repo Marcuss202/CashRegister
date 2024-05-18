@@ -127,18 +127,23 @@ def Register_mode():
     Third_Entry.config(state='disabled')
     
 def Total_amount():
-    global Total, num_spaces_reg, last_entered_number, Department_button_pressed, X_Cost, X_time_button_pressed
+    global Total, num_spaces_reg, last_entered_number, Department_button_pressed, X_Cost, X_time_button_pressed, procent_button_pressed, new_price
     last_entered_number = float(last_entered_number)
     Total = float(Total)
     X_Cost = float(X_Cost)
+
     if X_time_button_pressed == True:
         Total = X_Cost + Total
         X_time_button_pressed = False
+    elif procent_button_pressed == True:
+        Total = Total - last_entered_number + new_price
+        procent_button_pressed = False
 
     else:
         Total = last_entered_number + Total
     Total = "{:.2f}".format(Total)
     Third_Entry.config(state='normal')
+    Third_Entry.config(bg="#51458B", fg="#FFFFFF")
     num_spaces_reg = max(0, 18 - len("***TOTAL") - len(str(Total)))
     Third_Entry.delete('1.0', 'end')
     Third_Entry.insert('end', '***TOTAL')
@@ -156,16 +161,40 @@ def X_time():
     Fourth_Entry.config(state='disabled')
 
 def minus_percent():
-    global Total, percent_button_pressed, How_many_percent, last_entered_number, X_Cost, new_price
-    if Department_button_pressed == True:
+    global Total, How_many_percent, last_entered_number, X_Cost, new_price, Inputed_last_discount, money_saved, procent_button_pressed
+    if Department_button_pressed == True: #because the last pressed button is actually the discount amount.
         error_message()
     else:
-        How_many_percent = Fourth_Entry.get('1.0', 'end-1c')
-        new_price = X_Cost - (X_Cost * (int(How_many_percent) / 100))
+        procent_button_pressed = True
+        Inputed_last_discount = int(Fourth_Entry.get('1.0', 'end-1c'))  # gets last entered 10%
+        How_many_percent = Inputed_last_discount / 100 #percent in 0.10 format
+        money_saved = last_entered_number * How_many_percent
+        new_price = float(last_entered_number) - float(money_saved)
+        money_saved = "{:.2f}".format(money_saved)
+        print(last_entered_number, How_many_percent, new_price)
+
+        clear_screen()
+        First_Entry.config(state='normal')
+        num_spaces_first_entry = max(0, 20 - len(str(Inputed_last_discount) + "%" + "-"))
+        First_Entry.insert('end', " " * num_spaces_first_entry + "-" + str(Inputed_last_discount) + "%")
+        First_Entry.config(state='disabled')
+
+        Second_Entry.config(state='normal')
+        Second_Entry.insert('end', "-%")
+        num_spaces_second_entry = max(0, 20 - len("-%") - len("-" + str(money_saved)))
+        Second_Entry.insert('end', " " * num_spaces_second_entry + "-" + money_saved)
+        Second_Entry.config(state='disabled')
+
         Fourth_Entry.config(state='normal')
-        Fourth_Entry.delete('1.0', 'end')
+        Fourth_Entry.insert('end', "-%")
+        num_spaces_second_entry = max(0, 27 - len("-%") - len("-" + str(money_saved)))
+        Fourth_Entry.insert('end', " " * num_spaces_second_entry + "-" + money_saved)
         Fourth_Entry.config(state='disabled')
-        First_Entry_input()
+
+        Total_amount()
+
+
+
 
 def Subtotal_button_input():
     Subtotal_Entry.config(state='normal')
