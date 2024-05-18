@@ -194,6 +194,40 @@ def minus_percent():
             Fourth_Entry.config(state='disabled')
             Total_amount()
 
+def plus_percent():
+    global Total, How_many_percent, last_entered_number, X_Cost, new_price, Inputed_last_discount, money_saved, procent_button_pressed
+    if Department_button_pressed == True: #because the last pressed button is actually the discount amount.
+        error_message()
+    else:
+        procent_button_pressed = True
+        Inputed_last_discount = int(Fourth_Entry.get('1.0', 'end-1c'))  # gets last entered 10%
+        if Inputed_last_discount < 0 or Inputed_last_discount > 100:
+            error_message()
+        else:
+            How_many_percent = Inputed_last_discount / 100 #percent in 0.10 format
+            money_saved = last_entered_number * How_many_percent
+            new_price = float(last_entered_number) + float(money_saved)
+            money_saved = "{:.2f}".format(money_saved)
+
+            clear_screen()
+            First_Entry.config(state='normal')
+            num_spaces_first_entry = max(0, 20 - len(str(Inputed_last_discount) + "%" + "+"))
+            First_Entry.insert('end', " " * num_spaces_first_entry + "+" + str(Inputed_last_discount) + "%")
+            First_Entry.config(state='disabled')
+
+            Second_Entry.config(state='normal')
+            Second_Entry.insert('end', "+%")
+            num_spaces_second_entry = max(0, 20 - len("+%") - len("+" + str(money_saved)))
+            Second_Entry.insert('end', " " * num_spaces_second_entry + "+" + money_saved)
+            Second_Entry.config(state='disabled')
+
+            Fourth_Entry.config(state='normal')
+            Fourth_Entry.insert('end', "+%")
+            num_spaces_second_entry = max(0, 27 - len("+%") - len("+" + str(money_saved)))
+            Fourth_Entry.insert('end', " " * num_spaces_second_entry + "+" + money_saved)
+            Fourth_Entry.config(state='disabled')
+            Total_amount()
+
 
 
 
@@ -747,7 +781,7 @@ button_19 = Button(
     image=button_image_19,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("+%"),
+    command=lambda: plus_percent(),
     relief="flat"
 )
 button_19.place(
