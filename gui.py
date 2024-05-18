@@ -300,31 +300,34 @@ def mode_operator():
 
 def CASH_button_input():
     global Cash_given, Total, Change, num_spaces_change, last_entered_number
-    Subtotal_button_input()
-    Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
-    Cash_given = Cash_given / 100 
-    Cash_given = "{:.2f}".format(Cash_given)
-    if Cash_given < Total:
+    if Department_button_pressed == False:
         error_message()
     else:
-        clear_screen()
-        Change = float(Cash_given) - float(Total)
-        Change = "{:.2f}".format(Change)
+        Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
+        Subtotal_button_input()
+        Cash_given = Cash_given / 100 
+        Cash_given = "{:.2f}".format(Cash_given)
+        if Cash_given < Total:
+            error_message()
+        else:
+            clear_screen()
+            Change = float(Cash_given) - float(Total)
+            Change = "{:.2f}".format(Change)
 
-        First_Entry.config(state='normal')
-        num_spaces_change = max(0, 20 - len("CASH") - len(Cash_given))
-        First_Entry.delete('1.0', 'end')
-        First_Entry.insert('end', 'CASH')
-        First_Entry.insert('end', " " * num_spaces_change + Cash_given)
-        First_Entry.config(state='disabled')
+            First_Entry.config(state='normal')
+            num_spaces_change = max(0, 20 - len("CASH") - len(Cash_given))
+            First_Entry.delete('1.0', 'end')
+            First_Entry.insert('end', 'CASH')
+            First_Entry.insert('end', " " * num_spaces_change + Cash_given)
+            First_Entry.config(state='disabled')
 
-        Third_Entry.config(state='normal')
-        Third_Entry.config(bg="#51458B", fg="#FFFFFF")
-        num_spaces_change = max(0, 17 - len("CHANGE") - len(Change))
-        Third_Entry.delete('1.0', 'end')
-        Third_Entry.insert('end', 'CHANGE')
-        Third_Entry.insert('end', " " * num_spaces_change + Change)
-        Third_Entry.config(state='disabled')
+            Third_Entry.config(state='normal')
+            Third_Entry.config(bg="#51458B", fg="#FFFFFF")
+            num_spaces_change = max(0, 17 - len("CHANGE") - len(Change))
+            Third_Entry.delete('1.0', 'end')
+            Third_Entry.insert('end', 'CHANGE')
+            Third_Entry.insert('end', " " * num_spaces_change + Change)
+            Third_Entry.config(state='disabled')
 
 
 
@@ -400,10 +403,25 @@ def error_message():
 #---------- WINDOW -------------------------------------------------------------#
 
 window = Tk()
+window.title("Cash Register")
 
 window.geometry("1920x1080")
 window.configure(bg = "#BCBCBC")
 
+
+#---------- Canvas Till -------------------------------------------------------------#
+
+canvasCash = Canvas(
+    window,
+    bg = "#BCBCBC",
+    height = 1080,
+    width = 1920,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
+)
+
+canvasCash.place_forget()
 #---------- CANVAS -------------------------------------------------------------#
 
 canvas = Canvas(
@@ -416,9 +434,10 @@ canvas = Canvas(
     relief = "ridge"
 )
 
+canvas.place(x = 0, y = 0)
 #---------- IMAGES -------------------------------------------------------------#
 
-canvas.place(x = 0, y = 0)
+
 image_image_1 = PhotoImage(
     file=relative_to_assets("image_1.png"))
 image_1 = canvas.create_image(
