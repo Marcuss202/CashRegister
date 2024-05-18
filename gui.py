@@ -326,26 +326,7 @@ def CASH_button_input():
         Third_Entry.insert('end', " " * num_spaces_change + Change)
         Third_Entry.config(state='disabled')
 
-        Receipt_print()
 
-def Receipt_print(): #45 letters in one line
-    global Total, Cash_given, Change
-    Receipt_Entry_header.config(state='normal')
-    Receipt_Entry_header.insert('end', '\n')
-    Receipt_Entry_header.insert('end', '                CASH RECEIPT\n')
-    Receipt_Entry_header.insert('end', '\n')
-    Receipt_Entry_header.insert('end', '*************************************************\n')
-    Receipt_Entry_header.insert('end', '\n')
-    Receipt_Entry_header.insert('end', 'Date: {}\n'.format(date.today()))
-    Receipt_Entry_header.insert('end', '---------------------------------------------\n')
-    Receipt_Entry_header.config(state='disabled')
-
-
-    Receipt_Entry_footer.config(state='normal')
-    Receipt_Entry_footer.insert('end', '*************************************************\n')
-    Receipt_Entry_footer.insert('end', '\n')
-    Receipt_Entry_footer.insert('end', "      Thank you for shopping with us!\n")
-    Receipt_Entry_footer.config(state='disabled')
 
     
 #---------- GLOBAL VARIABLES -------------------------------------------------------------#
@@ -502,13 +483,7 @@ image_8 = canvas.create_image(
     image=image_image_8
 )
 
-receipt_image = PhotoImage(
-    file=relative_to_assets("Receipt.png"))
-image_receipt = canvas.create_image(
-    1595,
-    545.0,
-    image=receipt_image
-)
+
 
 #---------- BUTTONS -------------------------------------------------------------#
 
@@ -1214,39 +1189,6 @@ Third_Entry_ERROR = Text(
 )
 Third_Entry_ERROR.pack_forget() 
 
-Receipt_Entry_header = Text(
-    canvas,
-    bd=0,
-    bg="#EEEEEE",
-    highlightthickness=0,
-    font=("Merchant Copy DoubleSize", 8, "bold"),
-    state='disabled'
-)
-
-Receipt_Entry_header.place(
-    x=1394,
-    y=121,
-    width=410,
-    height=844,
-)
-
-
-
-Receipt_Entry_footer = Text(
-    canvas,
-    bd=0,
-    bg="#EEEEEE",
-    highlightthickness=0,
-    font=("Merchant Copy DoubleSize", 8, "bold"),
-    state='disabled'
-)
-
-Receipt_Entry_footer.place(
-    x=1394,
-    y=889,
-    width=410,
-    height=76,
-)
 
 Subtotal_Entry = Text(
     canvas,
