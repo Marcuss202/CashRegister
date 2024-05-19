@@ -440,13 +440,13 @@ canvasCash.place_forget()
 
 #---------- Images till -------------------------------------------------------------#
 
-image_image_1 = PhotoImage(
-    file=relative_to_assets("cashregisterbills.png"))
-image_1 = canvasCash.create_image(
-    960.0,
-    539.0,
-    image=image_image_1
-)
+# image_image_1 = PhotoImage(
+#     file=relative_to_assets("cashregisterbills.png"))
+# image_1 = canvasCash.create_image(
+#     960.0,
+#     539.0,
+#     image=image_image_1
+# )
 
 #---------- CANVAS -------------------------------------------------------------#
 
@@ -463,6 +463,14 @@ canvas = Canvas(
 canvas.place(x = 0, y = 0)
 #---------- IMAGES -------------------------------------------------------------#
 
+
+image_image_9 = PhotoImage(
+    file=relative_to_assets("table.png"))
+image_9 = canvas.create_image(
+    953.0,
+    700.0,
+    image=image_image_9
+)
 
 image_image_1 = PhotoImage(
     file=relative_to_assets("image_1.png"))
