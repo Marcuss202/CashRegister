@@ -139,6 +139,7 @@ def Total_amount():
         if Subtotal_button_pressed == True:
             Total = Total*0 + new_price
             procent_button_pressed = False
+            Subtotal_button_pressed = False
         else:
             Total = Total - last_entered_number + new_price
             procent_button_pressed = False
@@ -328,6 +329,8 @@ def CASH_button_input():
             Third_Entry.insert('end', 'CHANGE')
             Third_Entry.insert('end', " " * num_spaces_change + Change)
             Third_Entry.config(state='disabled')
+            Change_to_till()
+            
 
 
 
@@ -399,6 +402,18 @@ def error_message():
     Third_Entry_ERROR.config(state='disabled')
     window.after(3000, hide_error_message)
 
+def hide_all_buttons():
+    buttons = []
+    for button in buttons:
+        button.place_forget()
+
+def Change_to_till():
+    canvas.place_forget()
+    canvasCash.place(x = 0, y = 0)
+
+def Change_to_main():
+    canvasCash.place_forget()
+    canvas.place(x = 0, y = 0)
 
 #---------- WINDOW -------------------------------------------------------------#
 
@@ -422,6 +437,17 @@ canvasCash = Canvas(
 )
 
 canvasCash.place_forget()
+
+#---------- Images till -------------------------------------------------------------#
+
+image_image_1 = PhotoImage(
+    file=relative_to_assets("cashregisterbills.png"))
+image_1 = canvasCash.create_image(
+    960.0,
+    539.0,
+    image=image_image_1
+)
+
 #---------- CANVAS -------------------------------------------------------------#
 
 canvas = Canvas(
@@ -509,6 +535,7 @@ image_8 = canvas.create_image(
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
 button_1 = Button(
+    canvas,
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
@@ -525,6 +552,7 @@ button_1.place(
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
 button_2 = Button(
+    canvas,
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
@@ -541,6 +569,7 @@ button_2.place(
 button_image_3 = PhotoImage(
     file=relative_to_assets("button_3.png"))
 button_3 = Button(
+    canvas,
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
@@ -557,6 +586,7 @@ button_3.place(
 button_image_4 = PhotoImage(
     file=relative_to_assets("button_4.png"))
 button_4 = Button(
+    canvas,
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
@@ -573,6 +603,7 @@ button_4.place(
 button_image_5 = PhotoImage(
     file=relative_to_assets("button_5.png"))
 button_5 = Button(
+    canvas,
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
@@ -589,6 +620,7 @@ button_5.place(
 button_image_6 = PhotoImage(
     file=relative_to_assets("button_6.png"))
 Dept5_button = Button(
+    canvas,
     image=button_image_6,
     borderwidth=0,
     highlightthickness=0,
@@ -606,6 +638,7 @@ Dept5_button.place(
 button_image_7 = PhotoImage(
     file=relative_to_assets("button_7.png"))
 Dept4_button = Button(
+    canvas,
     image=button_image_7,
     borderwidth=0,
     highlightthickness=0,
@@ -622,6 +655,7 @@ Dept4_button.place(
 button_image_8 = PhotoImage(
     file=relative_to_assets("button_8.png"))
 Dept3_button = Button(
+    canvas,
     image=button_image_8,
     borderwidth=0,
     highlightthickness=0,
@@ -638,6 +672,7 @@ Dept3_button.place(
 button_image_9 = PhotoImage(
     file=relative_to_assets("button_9.png"))
 Dept2_button = Button(
+    canvas,
     image=button_image_9,
     borderwidth=0,
     highlightthickness=0,
@@ -654,6 +689,7 @@ Dept2_button.place(
 button_image_10 = PhotoImage(
     file=relative_to_assets("button_10.png"))
 Dept1_button = Button(
+    canvas,
     image=button_image_10,
     borderwidth=0,
     highlightthickness=0,
@@ -670,6 +706,7 @@ Dept1_button.place(
 button_image_11 = PhotoImage(
     file=relative_to_assets("button_11.png"))
 button_11 = Button(
+    canvas,
     image=button_image_11,
     borderwidth=0,
     highlightthickness=0,
@@ -686,6 +723,7 @@ button_11.place(
 button_image_12 = PhotoImage(
     file=relative_to_assets("button_12.png"))
 button_12 = Button(
+    canvas,
     image=button_image_12,
     borderwidth=0,
     highlightthickness=0,
@@ -702,6 +740,7 @@ button_12.place(
 button_image_13 = PhotoImage(
     file=relative_to_assets("button_13.png"))
 button_13 = Button(
+    canvas,
     image=button_image_13,
     borderwidth=0,
     highlightthickness=0,
@@ -718,6 +757,7 @@ button_13.place(
 button_image_14 = PhotoImage(
     file=relative_to_assets("button_14.png"))
 button_14 = Button(
+    canvas,
     image=button_image_14,
     borderwidth=0,
     highlightthickness=0,
@@ -734,6 +774,7 @@ button_14.place(
 button_image_15 = PhotoImage(
     file=relative_to_assets("button_15.png"))
 button_15 = Button(
+    canvas,
     image=button_image_15,
     borderwidth=0,
     highlightthickness=0,
@@ -750,6 +791,7 @@ button_15.place(
 button_image_16 = PhotoImage(
     file=relative_to_assets("button_16.png"))
 button_16 = Button(
+    canvas,
     image=button_image_16,
     borderwidth=0,
     highlightthickness=0,
@@ -766,6 +808,7 @@ button_16.place(
 button_image_17 = PhotoImage(
     file=relative_to_assets("button_17.png"))
 button_17 = Button(
+    canvas,
     image=button_image_17,
     borderwidth=0,
     highlightthickness=0,
@@ -782,6 +825,7 @@ button_17.place(
 button_image_18 = PhotoImage(
     file=relative_to_assets("button_18.png"))
 button_18 = Button(
+    canvas,
     image=button_image_18,
     borderwidth=0,
     highlightthickness=0,
@@ -798,6 +842,7 @@ button_18.place(
 button_image_19 = PhotoImage(
     file=relative_to_assets("button_19.png"))
 button_19 = Button(
+    canvas,
     image=button_image_19,
     borderwidth=0,
     highlightthickness=0,
@@ -814,6 +859,7 @@ button_19.place(
 button_image_20 = PhotoImage(
     file=relative_to_assets("button_20.png"))
 button_20 = Button(
+    canvas,
     image=button_image_20,
     borderwidth=0,
     highlightthickness=0,
@@ -830,6 +876,7 @@ button_20.place(
 button_image_21 = PhotoImage(
     file=relative_to_assets("button_21.png"))
 Button_7 = Button(
+    canvas,
     image=button_image_21,
     borderwidth=0,
     highlightthickness=0,
@@ -846,6 +893,7 @@ Button_7.place(
 button_image_22 = PhotoImage(
     file=relative_to_assets("button_22.png"))
 Button_4 = Button(
+    canvas,
     image=button_image_22,
     borderwidth=0,
     highlightthickness=0,
@@ -862,6 +910,7 @@ Button_4.place(
 button_image_23 = PhotoImage(
     file=relative_to_assets("button_23.png"))
 Button_1 = Button(
+    canvas,
     image=button_image_23,
     borderwidth=0,
     highlightthickness=0,
@@ -878,6 +927,7 @@ Button_1.place(
 button_image_24 = PhotoImage(
     file=relative_to_assets("button_24.png"))
 Button_8 = Button(
+    canvas,
     image=button_image_24,
     borderwidth=0,
     highlightthickness=0,
@@ -894,6 +944,7 @@ Button_8.place(
 button_image_25 = PhotoImage(
     file=relative_to_assets("button_25.png"))
 Button_9 = Button(
+    canvas,
     image=button_image_25,
     borderwidth=0,
     highlightthickness=0,
@@ -910,6 +961,7 @@ Button_9.place(
 button_image_26 = PhotoImage(
     file=relative_to_assets("button_26.png"))
 Button_5 = Button(
+    canvas,
     image=button_image_26,
     borderwidth=0,
     highlightthickness=0,
@@ -926,6 +978,7 @@ Button_5.place(
 button_image_27 = PhotoImage(
     file=relative_to_assets("button_27.png"))
 Button_6 = Button(
+    canvas,
     image=button_image_27,
     borderwidth=0,
     highlightthickness=0,
@@ -942,6 +995,7 @@ Button_6.place(
 button_image_28 = PhotoImage(
     file=relative_to_assets("button_28.png"))
 Button_2 = Button(
+    canvas,
     image=button_image_28,
     borderwidth=0,
     highlightthickness=0,
@@ -958,6 +1012,7 @@ Button_2.place(
 button_image_29 = PhotoImage(
     file=relative_to_assets("button_29.png"))
 Button_3 = Button(
+    canvas,
     image=button_image_29,
     borderwidth=0,
     highlightthickness=0,
@@ -974,6 +1029,7 @@ Button_3.place(
 button_image_30 = PhotoImage(
     file=relative_to_assets("button_30.png"))
 button_30 = Button(
+    canvas,
     image=button_image_30,
     borderwidth=0,
     highlightthickness=0,
@@ -990,6 +1046,7 @@ button_30.place(
 button_image_31 = PhotoImage(
     file=relative_to_assets("button_31.png"))
 Button_0 = Button(
+    canvas,
     image=button_image_31,
     borderwidth=0,
     highlightthickness=0,
@@ -1006,6 +1063,7 @@ Button_0.place(
 button_image_32 = PhotoImage(
     file=relative_to_assets("button_32.png"))
 Button_00 = Button(
+    canvas,
     image=button_image_32,
     borderwidth=0,
     highlightthickness=0,
@@ -1022,6 +1080,7 @@ Button_00.place(
 button_image_33 = PhotoImage(
     file=relative_to_assets("button_33.png"))
 button_33 = Button(
+    canvas,
     image=button_image_33,
     borderwidth=0,
     highlightthickness=0,
@@ -1038,6 +1097,7 @@ button_33.place(
 button_image_34 = PhotoImage(
     file=relative_to_assets("button_34.png"))
 button_34 = Button(
+    canvas,
     image=button_image_34,
     borderwidth=0,
     highlightthickness=0,
@@ -1054,6 +1114,7 @@ button_34.place(
 button_image_35 = PhotoImage(
     file=relative_to_assets("button_35.png"))
 button_35 = Button(
+    canvas,
     image=button_image_35,
     borderwidth=0,
     highlightthickness=0,
@@ -1070,6 +1131,7 @@ button_35.place(
 button_image_36 = PhotoImage(
     file=relative_to_assets("button_36.png"))
 button_36 = Button(
+    canvas,
     image=button_image_36,
     borderwidth=0,
     highlightthickness=0,
@@ -1086,6 +1148,7 @@ button_36.place(
 button_image_37 = PhotoImage(
     file=relative_to_assets("button_37.png"))
 button_37 = Button(
+    canvas,
     image=button_image_37,
     borderwidth=0,
     highlightthickness=0,
@@ -1102,6 +1165,7 @@ button_37.place(
 button_image_38 = PhotoImage(
     file=relative_to_assets("button_38.png"))
 button_38 = Button(
+    canvas,
     image=button_image_38,
     borderwidth=0,
     highlightthickness=0,
