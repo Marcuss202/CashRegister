@@ -405,11 +405,6 @@ def error_message():
     Third_Entry_ERROR.config(state='disabled')
     window.after(3000, hide_error_message)
 
-def hide_all_buttons():
-    buttons = []
-    for button in buttons:
-        button.place_forget()
-
 def Change_to_till():
     canvas.place_forget()
     canvasCash.place(x = 0, y = 0)
@@ -471,6 +466,210 @@ button_till_1.place(
     y=51.0,
     width=114.0,
     height=119.0
+)
+
+button_till_image_2 = PhotoImage(
+    file=relative_to_assets("Button(1).png"))
+button_till_2 = Button(
+    canvasCash,
+    image=button_till_image_2,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("50EUR"),
+    relief="flat",
+)
+button_till_2.place(
+    x=429.0,
+    y=545.0,
+    width=234.0,
+    height=59.0
+)
+
+button_till_image_3 = PhotoImage(
+    file=relative_to_assets("Button-9.png"))
+button_till_3 = Button(
+    canvasCash,
+    image=button_till_image_3,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("20EUR"),
+    relief="flat",
+)
+button_till_3.place(
+    x=706.0,
+    y=545.0,
+    width=234.0,
+    height=59.0
+)
+
+button_till_image_4 = PhotoImage(
+    file=relative_to_assets("Button-10.png"))
+button_till_4 = Button(
+    canvasCash,
+    image=button_till_image_4,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("10EUR"),
+    relief="flat",
+)
+button_till_4.place(
+    x=973.0,
+    y=545.0,
+    width=234.0,
+    height=59.0
+)
+
+button_till_image_5 = PhotoImage(
+    file=relative_to_assets("Button-11.png"))
+button_till_5 = Button(
+    canvasCash,
+    image=button_till_image_5,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("5EUR"),
+    relief="flat",
+)
+button_till_5.place(
+    x=1250.0,
+    y=545.0,
+    width=234.0,
+    height=59.0
+)
+
+button_till_image_6 = PhotoImage(
+    file=relative_to_assets("Button-1.png"))
+button_till_6 = Button(
+    canvasCash,
+    image=button_till_image_6,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("1EUR"),
+    relief="flat",
+)
+button_till_6.place(
+    x=439.0,
+    y=771.0,
+    width=180.0,
+    height=59.0
+)
+
+button_till_image_7 = PhotoImage(
+    file=relative_to_assets("Button-2.png"))
+button_till_7 = Button(
+    canvasCash,
+    image=button_till_image_7,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("2EUR"),
+    relief="flat",
+)
+button_till_7.place(
+    x=728.0,
+    y=771.0,
+    width=180.0,
+    height=59.0
+)
+
+button_till_image_8 = PhotoImage(
+    file=relative_to_assets("Button-3.png"))
+button_till_8 = Button(
+    canvasCash,
+    image=button_till_image_8,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("0,50EUR"),
+    relief="flat",
+)
+button_till_8.place(
+    x=1017.0,
+    y=771.0,
+    width=180.0,
+    height=59.0
+)
+
+button_till_image_9 = PhotoImage(
+    file=relative_to_assets("Button-4.png"))
+button_till_9 = Button(
+    canvasCash,
+    image=button_till_image_9,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("0,20EUR"),
+    relief="flat",
+)
+button_till_9.place(
+    x=1296.0,
+    y=771.0,
+    width=180.0,
+    height=59.0
+)
+
+button_till_image_10 = PhotoImage(
+    file=relative_to_assets("Button-5.png"))
+button_till_10 = Button(
+    canvasCash,
+    image=button_till_image_10,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("0,10EUR"),
+    relief="flat",
+)
+button_till_10.place(
+    x=1329.0,
+    y=1002.0,
+    width=180.0,
+    height=59.0
+)
+
+button_till_image_11 = PhotoImage(
+    file=relative_to_assets("Button-6.png"))
+button_till_11 = Button(
+    canvasCash,
+    image=button_till_image_11,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("0,05EUR"),
+    relief="flat",
+)
+button_till_11.place(
+    x=1017.0,
+    y=1002.0,
+    width=180.0,
+    height=59.0
+)
+
+button_till_image_12 = PhotoImage(
+    file=relative_to_assets("Button-7.png"))
+button_till_12 = Button(
+    canvasCash,
+    image=button_till_image_12,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("0,02EUR"),
+    relief="flat",
+)
+button_till_12.place(
+    x=727.0,
+    y=1002.0,
+    width=180.0,
+    height=59.0
+)
+
+button_till_image_13 = PhotoImage(
+    file=relative_to_assets("Button-8.png"))
+button_till_13 = Button(
+    canvasCash,
+    image=button_till_image_13,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("0,01EUR"),
+    relief="flat",
+)
+button_till_13.place(
+    x=415.0,
+    y=1002.0,
+    width=180.0,
+    height=59.0
 )
 
 #---------- CANVAS -------------------------------------------------------------#
