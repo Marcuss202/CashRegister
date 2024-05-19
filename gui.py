@@ -304,7 +304,7 @@ def CASH_button_input():
     if Department_button_pressed == True or len(Fourth_Entry.get('1.0', 'end-1c')) == 0 or Total == 0:
         error_message()
     else:
-        Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
+        Cash_given = float(Fourth_Entry.get('1.0', 'end-1c'))
         Subtotal_button_input()
         Cash_given = Cash_given / 100 
         Cash_given = "{:.2f}".format(Cash_given)
@@ -330,6 +330,9 @@ def CASH_button_input():
             Third_Entry.insert('end', " " * num_spaces_change + Change)
             Third_Entry.config(state='disabled')
             Change_to_till()
+
+#---------- Till Def -------------------------------------------------------------#
+
             
 
 
@@ -440,13 +443,35 @@ canvasCash.place_forget()
 
 #---------- Images till -------------------------------------------------------------#
 
-# image_image_1 = PhotoImage(
-#     file=relative_to_assets("cashregisterbills.png"))
-# image_1 = canvasCash.create_image(
-#     960.0,
-#     539.0,
-#     image=image_image_1
-# )
+image_till_1 = PhotoImage(
+    file=relative_to_assets("TillImage.png"))
+image_1 = canvasCash.create_image(
+    0.0,
+    0.0,
+    anchor='nw',
+    image=image_till_1
+)
+
+
+
+#---------- Buttons till -------------------------------------------------------------#
+
+button_till_image_1 = PhotoImage(
+    file=relative_to_assets("CloseButton.png"))
+button_till_1 = Button(
+    canvasCash,
+    image=button_till_image_1,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: Change_to_main(),
+    relief="flat",
+)
+button_till_1.place(
+    x=1745.0,
+    y=51.0,
+    width=114.0,
+    height=119.0
+)
 
 #---------- CANVAS -------------------------------------------------------------#
 
