@@ -300,14 +300,14 @@ def mode_operator():
 
 def CASH_button_input():
     global Cash_given, Total, Change, num_spaces_change, last_entered_number
-    if Department_button_pressed == False:
+    if Department_button_pressed == True or len(Fourth_Entry.get('1.0', 'end-1c')) == 0 or Total == 0:
         error_message()
     else:
         Cash_given = int(Fourth_Entry.get('1.0', 'end-1c'))
         Subtotal_button_input()
         Cash_given = Cash_given / 100 
         Cash_given = "{:.2f}".format(Cash_given)
-        if Cash_given < Total:
+        if float(Cash_given) < float(Total):
             error_message()
         else:
             clear_screen()
