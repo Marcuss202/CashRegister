@@ -99,10 +99,6 @@ def Change_mode():
     Last_Entry.config(state='disabled')
     mode_operator()
 
-def mode_operator():
-    # Add your code for the mode_operator function here
-    pass
-    mode_operator()
 
 def Program_button_input():
     global mode, mode_index
@@ -113,6 +109,7 @@ def Program_button_input():
     Last_Entry.delete('1.0', 'end')
     Last_Entry.insert('end', mode)
     Last_Entry.config(state='disabled')
+    mode_operator()
 
 def Register_mode():
     global Total
