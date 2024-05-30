@@ -7,8 +7,10 @@ from datetime import date
 from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
 import pyglet
 
-pyglet.font.add_file("D:\GitHub\CashRegister\Merchant_Copy_Doublesize.ttf")
-pyglet.font.add_file("D:\GitHub\CashRegister\Open 24 Display St.ttf")
+
+#TO run change directory and add \\ on all \
+pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Merchant_Copy_Doublesize.ttf")
+pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Open 24 Display St.ttf")
 
 
 OUTPUT_PATH = Path(__file__).parent
