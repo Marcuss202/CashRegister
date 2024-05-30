@@ -330,10 +330,15 @@ def CASH_button_input():
             Third_Entry.insert('end', " " * num_spaces_change + Change)
             Third_Entry.config(state='disabled')
             Change_to_till()
+            Cash_and_change_till()
 
 #---------- Till Def -------------------------------------------------------------#
 
-            
+def Cash_and_change_till():
+    Cash_gave_till = str(First_Entry.get('1.0', 'end-1c'))
+    Cash_change_till = str(Third_Entry.get('1.0', 'end-1c'))
+    First_Entry_till.insert(Cash_gave_till)
+    Third_Entry_till.insert(Cash_change_till)
 
 
 
@@ -1521,6 +1526,40 @@ Subtotal_Entry.place(
     width=188,
     height=44,
 )
+# -------- Entry Till ----------------------------------------------------------------#
+
+First_Entry_till = Text(
+    canvasCash,
+    bd=0,
+    bg="#171916",
+    fg="#F5F5F5",
+    highlightthickness=0,
+    font=("Merchant Copy DoubleSize", 8),
+    state='disabled'
+)
+First_Entry_till.place(
+    x=868.0,
+    y=51.0,
+    width=166.0,
+    height=17.0
+)
+
+Third_Entry_till = Text(
+    canvasCash,
+    bd=0,
+    bg="#171916",
+    fg="#F5F5F5",
+    highlightthickness=0,
+    font=("Merchant Copy DoubleSize", 8, "bold"),
+    state='disabled'
+)
+Third_Entry_till.place(
+    x=868.0,
+    y=71.0,
+    width=166.0,
+    height=17.0
+)
+
 # --------- AUTO RUN CODE -------------------------------------------------------------#
 
 Cash_Register_turn_on()
