@@ -9,6 +9,7 @@ import pyglet
 
 
 #TO run change directory and add \\ on all \
+# To run install python 1.11.0 and pip install pyglet
 pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Merchant_Copy_Doublesize.ttf")
 pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Open 24 Display St.ttf")
 
