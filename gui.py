@@ -4,15 +4,17 @@ from pathlib import Path
 # from tkinter import *
 from time import sleep
 from datetime import date
-from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
+from tkinter import RIGHT, Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, Toplevel
 import pyglet
 
 
 #TO run change directory and add \\ on all \
 # To run install python 1.11.0 and pip install pyglet
-pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Merchant_Copy_Doublesize.ttf")
-pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Open 24 Display St.ttf")
+# pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Merchant_Copy_Doublesize.ttf")
+# pyglet.font.add_file("C:\\Users\\202-10\\Documents\\GitHub\\CashRegister\\Open 24 Display St.ttf")
 
+pyglet.font.add_file("D:\GitHub\CashRegister\Merchant_Copy_Doublesize.ttf")
+pyglet.font.add_file("D:\GitHub\CashRegister\Open 24 Display St.ttf")
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"build\assets\frame0")
