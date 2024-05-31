@@ -1,8 +1,0 @@
-def Clear_button_input():
-    global Department_button_pressed
-    if Department_button_pressed == False:
-        Fourth_Entry.config(state="normal")
-        Fourth_Entry.delete('1.0', 'end')
-        Fourth_Entry.config(state="disabled")
-    else:
-        error_message()
